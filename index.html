@@ -208,6 +208,14 @@ body {
   text-transform: uppercase;
   color: var(--ink-3);
 }
+  .weather {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-top: 4px;
+}
 .title-wrap {
   position: relative;
   margin-bottom: 28px;
@@ -766,6 +774,19 @@ body {
 .con-row.fav-team {
   background: linear-gradient(90deg, rgba(54,113,198,0.13) 0%, transparent 70%);
 }
+  .con-row.fav-team::after {
+  content: '★ FAV';
+  position: absolute;
+  right: 90px; top: 50%;
+  transform: translateY(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  font-weight: 700;
+  color: var(--redbull);
+  letter-spacing: .1em;
+  background: rgba(54,113,198,0.15);
+  padding: 2px 6px;
+}
 .con-top {
   display: grid;
   grid-template-columns: 26px 1fr auto;
@@ -925,6 +946,23 @@ body {
     <div class="brand-right">
       <div class="greeting" id="greeting">Good morning, Tilak</div>
       <div class="dateline" id="dateline"></div>
+      <div class="weather" id="weather">☀️ 28°C Miami</div>
+    <script>
+    (function(){
+      fetch('https://wttr.in/Miami?format=j1')
+        .then(response => response.json())
+        .then(data => {
+          const temp = data.current_condition[0].temp_C;
+          const desc = data.current_condition[0].weatherDesc[0].value.toLowerCase();
+          let icon = '☀️';
+          if (desc.includes('rain')) icon = '🌧️';
+          else if (desc.includes('cloud')) icon = '☁️';
+          else if (desc.includes('snow')) icon = '❄️';
+          document.getElementById('weather').innerHTML = `${icon} ${temp}°C Miami`;
+        })
+        .catch(err => console.error('Weather fetch failed:', err));
+    })();
+    </script>
     </div>
   </div>
   <div class="title-wrap">
@@ -1091,11 +1129,11 @@ body {
         <div class="con-top"><div class="con-pos">04</div><div><div class="con-name">Haas F1</div><div class="con-engine">Ferrari PU · USA</div></div><div class="con-pts">18</div></div>
         <div class="con-bar"><div class="con-bar-fill" style="width:13%; animation-delay:5.65s;"></div></div>
       </div>
-      <div class="con-row fav-team" style="--team-color: var(--alpine); animation-delay:4.82s;">
+      <div class="con-row" style="--team-color: var(--alpine); animation-delay:4.82s;">
         <div class="con-top"><div class="con-pos">05</div><div><div class="con-name">Alpine</div><div class="con-engine">Mercedes PU · FRA</div></div><div class="con-pts">16</div></div>
         <div class="con-bar"><div class="con-bar-fill" style="width:12%; animation-delay:5.7s;"></div></div>
       </div>
-      <div class="con-row" style="--team-color: var(--redbull); animation-delay:4.90s;">
+      <div class="con-row fav-team" style="--team-color: var(--redbull); animation-delay:4.90s;">
         <div class="con-top"><div class="con-pos">06</div><div><div class="con-name">Red Bull Racing ★</div><div class="con-engine">Red Bull Ford · AUT</div></div><div class="con-pts">16</div></div>
         <div class="con-bar"><div class="con-bar-fill" style="width:12%; animation-delay:5.75s;"></div></div>
       </div>
