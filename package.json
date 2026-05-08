@@ -1,0 +1,24 @@
+{
+  "name": "tilak-pitwall",
+  "version": "1.0.0",
+  "description": "Tilak's Pit Wall - F1 2026 Dashboard",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "test": "echo \"No tests specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bittuydvll07ll/My-Pitwall.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bittuydvll07ll/My-Pitwall/issues"
+  },
+  "homepage": "https://github.com/bittuydvll07ll/My-Pitwall#readme",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}
